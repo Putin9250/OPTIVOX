@@ -36,7 +36,7 @@ const NewsletterSection = () => {
           STAY INFORMED
         </p>
         <h2 className={`newsletter__headline ${isVisible ? 'animate' : ''}`}>
-          Subscribe to Areness Newsletter
+          Subscribe to OptiVox Newsletter
         </h2>
         <p className={`newsletter__description ${isVisible ? 'animate' : ''}`}>
           Enter your e‑mail address and get started for free.
