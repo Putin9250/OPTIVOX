@@ -1,0 +1,157 @@
+// Components/NewsletterSection/NewsletterSection.scss
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+$color-bg: #eae3d3;           // warm off‑white
+$color-dark: #14120f;
+$color-gold: #986409;
+$color-gold-soft: rgba(152, 100, 9, 0.25);
+$color-gray: #5a5650;
+$color-input-border: rgba(152, 100, 9, 0.2);
+
+.newsletter {
+  background-color: $color-bg;
+  padding: clamp(60px, 10vh, 100px) 0;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  overflow: hidden;
+
+  &__container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  // Animation base
+  &__pre-title,
+  &__headline,
+  &__description,
+  &__form {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+
+    &.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__pre-title.animate   { transition-delay: 0.1s; }
+  &__headline.animate    { transition-delay: 0.2s; }
+  &__description.animate { transition-delay: 0.3s; }
+  &__form.animate        { transition-delay: 0.4s; }
+
+  &__pre-title {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    color: $color-gold;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  &__headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4.5vw, 42px);
+    font-weight: 500;
+    line-height: 1.2;
+    color: $color-dark;
+    margin: 0 0 16px;
+  }
+
+  &__description {
+    font-size: 15px;
+    font-weight: 300;
+    color: $color-gray;
+    margin: 0 0 32px;
+  }
+
+  // Form
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    @media (min-width: 500px) {
+      flex-direction: row;
+      justify-content: center;
+      gap: 0;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    max-width: 360px;
+    padding: 14px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: $color-dark;
+    background: #fff;
+    border: 1px solid $color-input-border;
+    border-radius: 0;
+    outline: none;
+    transition: border-color 0.25s ease;
+
+    &:focus {
+      border-color: $color-gold;
+    }
+
+    &::placeholder {
+      color: rgba(90, 86, 80, 0.5);
+    }
+
+    @media (min-width: 500px) {
+      border-right: none;    // connects with the button
+    }
+  }
+
+  &__submit {
+    padding: 14px 28px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: #fff;
+    background-color: $color-gold;
+    border: 1px solid $color-gold;
+    border-radius: 0;
+    cursor: pointer;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+
+    &:hover {
+      background-color: darken($color-gold, 8%);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-gold;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 499px) {
+      width: 100%;
+      max-width: 360px;
+    }
+  }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .newsletter {
+    &__pre-title,
+    &__headline,
+    &__description,
+    &__form {
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}

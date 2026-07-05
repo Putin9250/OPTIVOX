@@ -1,0 +1,359 @@
+// Navbar.scss
+
+$color-bg: #050505;
+$color-white: #f5f2ec;
+$color-gold: #c5a46d;
+$color-gold-soft: rgba(197, 164, 109, 0.35);
+$color-gray: #a8a8a8;
+$color-border: rgba(197, 164, 109, 0.18);
+$color-divider: rgba(255, 255, 255, 0.12);
+$color-menu-bg: #1b1b1b;
+$navbar-height: 84px;
+
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+// ------------------------------------------------------------
+// Bar — solid, always visible
+// ------------------------------------------------------------
+.navbar__bar {
+  width: 100%;
+  height: $navbar-height;
+  background: linear-gradient(180deg, #141210 0%, #0a0908 55%, #050505 100%);
+  border-bottom: 1px solid $color-border;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 1001; // stays above the overlay so the pill is always clickable
+}
+
+.navbar__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 60px;
+
+  @media (max-width: 1200px) { padding: 0 40px; }
+  @media (max-width: 768px) { padding: 0 24px; }
+  @media (max-width: 480px) { padding: 0 18px; }
+}
+
+// ------------------------------------------------------------
+// Logo — icon left intentionally empty (drop your OV mark in it)
+// ------------------------------------------------------------
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  transition: opacity 0.35s ease;
+
+  &:hover { opacity: 0.85; }
+}
+
+.navbar__logo-icon {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border: 1px solid $color-gold-soft;
+  border-radius: 50%;
+  // Intentionally empty — place your OV mark (svg/img) here.
+}
+
+.navbar__logo-text-group {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.navbar__logo-text {
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: 0.14em;
+  color: $color-gold;
+  text-transform: uppercase;
+}
+
+.navbar__logo-subtext {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  color: $color-gray;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .navbar__logo-icon { width: 28px; height: 28px; }
+  .navbar__logo-text { font-size: 17px; letter-spacing: 0.1em; }
+  .navbar__logo-subtext { font-size: 7px; }
+  .navbar__logo { gap: 10px; }
+}
+
+@media (max-width: 480px) {
+  .navbar__logo-icon { width: 24px; height: 24px; }
+  .navbar__logo-text { font-size: 15px; letter-spacing: 0.08em; }
+  .navbar__logo-subtext { font-size: 6px; }
+  .navbar__logo { gap: 8px; }
+}
+
+// ------------------------------------------------------------
+// Menu pill
+// ------------------------------------------------------------
+.navbar__menu-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 46px;
+  padding: 0 22px;
+  background: $color-menu-bg;
+  border: 1px solid $color-border;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    background: #242119;
+    border-color: $color-gold-soft;
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-gold;
+    outline-offset: 2px;
+  }
+}
+
+.navbar__menu-pill-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $color-white;
+}
+
+.navbar__hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 18px;
+  height: 13px;
+  transition: transform 0.4s ease;
+
+  &--active { transform: rotate(90deg); }
+}
+
+.navbar__hamburger-line {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: $color-gold;
+  border-radius: 2px;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+
+  &:nth-child(1) { transform-origin: top left; }
+  &:nth-child(3) { transform-origin: bottom left; }
+
+  .navbar__hamburger--active & {
+    &:nth-child(1) { transform: rotate(45deg) translate(2px, -1px); }
+    &:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    &:nth-child(3) { transform: rotate(-45deg) translate(2px, 1px); }
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar__menu-pill { height: 42px; padding: 0 18px; gap: 10px; }
+  .navbar__menu-pill-text { font-size: 12px; }
+}
+
+@media (max-width: 480px) {
+  .navbar__menu-pill { height: 38px; padding: 0 14px; gap: 8px; }
+  .navbar__menu-pill-text { font-size: 11px; letter-spacing: 0.06em; }
+  .navbar__hamburger { width: 15px; height: 11px; }
+}
+
+// ------------------------------------------------------------
+// Overlay — dark translucent panel dropping below the bar,
+// scrollable, sits under the bar (bar stays clickable to close)
+// ------------------------------------------------------------
+.navbar__overlay {
+  position: fixed;
+  top: $navbar-height;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - #{$navbar-height});
+  background: rgba(10, 9, 8, 0.94);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 999;
+  transform: translateY(-12px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+  overflow: hidden;
+
+  &--open {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: all;
+  }
+}
+
+.navbar__overlay-scroll {
+  height: 100%;
+  overflow-y: auto;
+  padding: 8px 0 40px;
+}
+
+// ------------------------------------------------------------
+// Accordion
+// ------------------------------------------------------------
+.navbar__accordion {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @media (max-width: 480px) {
+    padding: 0 20px;
+  }
+}
+
+.navbar__accordion-item {
+  border-bottom: 1px solid $color-divider;
+}
+
+.navbar__accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 22px 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+  color: $color-white;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $color-gold;
+  }
+
+  &--active {
+    color: $color-gold;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-gold;
+    outline-offset: 2px;
+  }
+}
+
+.navbar__accordion-chevron {
+  font-size: 14px;
+  color: inherit;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+
+  .navbar__accordion-trigger--active & {
+    transform: rotate(180deg);
+  }
+}
+
+.navbar__accordion-link-flat {
+  display: block;
+  padding: 22px 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: $color-white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover { color: $color-gold; }
+}
+
+.navbar__accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  .navbar__accordion-item--open & {
+    grid-template-rows: 1fr;
+  }
+
+  // grid-template-rows animation needs a min-height:0 child wrapper
+  > * {
+    min-height: 0;
+  }
+}
+
+.navbar__accordion-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+  li {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  a {
+    display: block;
+    padding: 14px 4px 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: $color-gray;
+    text-decoration: none;
+    transition: color 0.25s ease, padding-left 0.25s ease;
+
+    &:hover {
+      color: $color-white;
+      padding-left: 22px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-gold;
+      outline-offset: -2px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar__accordion-trigger,
+  .navbar__accordion-link-flat {
+    font-size: 17px;
+    padding: 18px 0;
+  }
+  .navbar__accordion-links a {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar__overlay,
+  .navbar__accordion-panel,
+  .navbar__accordion-chevron,
+  .navbar__hamburger,
+  .navbar__menu-pill {
+    transition: none !important;
+  }
+}

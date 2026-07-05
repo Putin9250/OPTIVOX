@@ -1,0 +1,233 @@
+// Components/CapabilitiesSection/CapabilitiesSection.scss
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+$color-bg: #f7f3ea;
+$color-dark: #14120f;
+$color-gold: #986409;
+$color-gold-soft: rgba(197, 164, 109, 0.35);
+$color-gray: #5a5650;
+
+// Animation base styles
+.capabilities {
+  background-color: $color-bg;
+  padding: clamp(60px, 10vh, 120px) 0;
+  font-family: 'Inter', sans-serif;
+  color: $color-dark;
+  overflow: hidden; // ensures no overflow from animated elements
+
+  &__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    gap: clamp(40px, 8vw, 80px);
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+      gap: 40px;
+    }
+  }
+
+  // Initial hidden state for all animated children
+  &__pre-title,
+  &__headline,
+  &__description,
+  &__framework-title,
+  &__list,
+  &__cta,
+  &__image-wrapper {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+
+    &.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Stagger delays
+  &__pre-title.animate       { transition-delay: 0.1s; }
+  &__headline.animate        { transition-delay: 0.2s; }
+  &__description.animate     { transition-delay: 0.35s; }
+  &__framework-title.animate { transition-delay: 0.5s; }
+  &__list.animate            { transition-delay: 0.6s; }
+  &__cta.animate             { transition-delay: 0.1s; }
+  &__image-wrapper.animate   { transition-delay: 0.1s; } // image comes in early too
+
+  // Left text block
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__pre-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    color: $color-gold;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+
+  &__headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 500;
+    line-height: 1.15;
+    color: $color-dark;
+    margin: 0 0 24px;
+
+    em {
+      font-style: italic;
+      color: $color-gold;
+    }
+  }
+
+  &__description {
+    font-size: clamp(14px, 1.3vw, 16px);
+    font-weight: 300;
+    line-height: 1.7;
+    color: $color-gray;
+    margin: 0 0 24px;
+  }
+
+  &__framework-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0 0 16px;
+    color: $color-dark;
+    letter-spacing: 0.03em;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+
+    li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 14px;
+      font-weight: 400;
+      color: $color-dark;
+      line-height: 1.6;
+
+      &::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: $color-gold;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    padding: 16px 34px;
+    border: 1px solid $color-gold-soft;
+    border-radius: 0;
+    background: transparent;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease,
+                transform 0.15s ease, box-shadow 0.15s ease;
+
+    &:focus-visible {
+      outline: 2px solid $color-gold;
+      outline-offset: 3px;
+    }
+
+    &:hover {
+      background: $color-gold;
+      border-color: $color-gold;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(197, 164, 109, 0.35);
+
+      .capabilities__cta-text {
+        color: #fff;
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__cta-text {
+    position: relative;
+    z-index: 1;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: $color-gold;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+  }
+
+  // Right image block
+  &__image-wrapper {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(100, 73, 27, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    // Subtle hover effect: scale + gold shadow
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 40px rgba(197, 164, 109, 0.15);
+    }
+
+    @media (max-width: 900px) {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    transition: transform 0.3s ease;
+
+    // Optional: slight zoom on wrapper hover
+    .capabilities__image-wrapper:hover & {
+      transform: scale(1.03);
+    }
+  }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .capabilities {
+    &__pre-title,
+    &__headline,
+    &__description,
+    &__framework-title,
+    &__list,
+    &__cta,
+    &__image-wrapper {
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}

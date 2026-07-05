@@ -1,0 +1,152 @@
+// Components/FloatingConsultButton/FloatingConsultButton.scss
+$color-gold: #c5a46d;
+$color-gold-dark: #14120f;
+$color-bg: rgba(20, 18, 16, 0.75);
+$collapsed-width: 52px;
+$expanded-width: 290px;
+
+.fab-consult {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 500;
+  
+  animation: slideInRight 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translate(30px, -50%);
+    opacity: 0;
+  }
+  80% {
+    transform: translate(-6px, -50%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, -50%);
+    opacity: 1;
+  }
+}
+
+.fab-consult__button {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  width: $collapsed-width;
+  padding: 0;
+  border: none;
+  border-radius: 10px 0 0 10px;
+  background: $color-bg;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  white-space: nowrap;
+  justify-content: flex-end;                     // icon on the right by default
+  color: $color-gold;
+
+  // Smooth expansion and collapse – no bounce!
+  transition: width 0.4s ease-in-out,            // ← changed to ease-in-out
+              background-color 0.35s ease,
+              box-shadow 0.35s ease,
+              justify-content 0s 0.4s;           // swap after width transition ends
+
+  &:hover,
+  &:focus-visible {
+    width: $expanded-width;
+    justify-content: flex-start;                 // icon moves left
+    background: $color-gold;
+    box-shadow: 0 8px 30px rgba(197, 164, 109, 0.4);
+    transition: width 0.4s ease-in-out,          // same easing for hover
+                background-color 0.35s ease,
+                box-shadow 0.35s ease,
+                justify-content 0s 0s;           // swap immediately on hover
+
+    .fab-consult__icon {
+      color: $color-gold-dark;
+    }
+
+    .fab-consult__text {
+      max-width: 230px;
+      opacity: 1;
+      margin-left: 10px;
+    }
+  }
+
+  &:active {
+    transform: scale(0.96);
+    transition: transform 0.1s ease;
+  }
+}
+
+.fab-consult__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $collapsed-width;
+  height: 100%;
+  flex-shrink: 0;
+  color: inherit;
+  transition: color 0.35s ease;
+
+  svg {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+  }
+}
+
+.fab-consult__text {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: $color-gold-dark;
+  transition: max-width 0.4s ease-in-out,        // smooth text reveal
+              opacity 0.3s ease,
+              margin-left 0.3s ease;
+  margin-left: 0;
+}
+
+// Responsive
+@media (max-width: 600px) {
+  $collapsed-width: 44px;
+  $expanded-width: 240px;
+
+  .fab-consult__button {
+    height: 44px;
+    width: $collapsed-width;
+    border-radius: 8px 0 0 8px;
+
+    &:hover,
+    &:focus-visible {
+      width: $expanded-width;
+    }
+  }
+
+  .fab-consult__icon {
+    width: $collapsed-width;
+  }
+
+  .fab-consult__text {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .fab-consult__button:hover,
+  .fab-consult__button:focus-visible {
+    width: 210px;
+  }
+
+  .fab-consult__text {
+    font-size: 11px;
+  }
+}

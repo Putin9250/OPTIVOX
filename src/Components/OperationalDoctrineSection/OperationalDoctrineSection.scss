@@ -1,0 +1,186 @@
+// Components/OperationalDoctrineSection/OperationalDoctrineSection.scss
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+$color-gold: #986409;
+$color-gold-soft: rgba(152, 100, 9, 0.25);
+$color-gray: #b0a99c;
+$color-white: #f5f2ec;
+
+.doctrine {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #0a0a0a;   // fallback if image fails
+  color: $color-white;
+  padding: clamp(80px, 12vh, 140px) 0;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+}
+
+// Dark overlay on top of the image for text readability
+.doctrine__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.85) 40%, rgba(10, 10, 10, 0.95) 100%),
+    radial-gradient(ellipse at 50% 40%, rgba(152, 100, 9, 0.12) 0%, );
+}
+
+// Container sits above overlay
+.doctrine__container {
+  position: relative;
+  z-index: 2;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 40px;
+  text-align: center;
+}
+
+// Animation base (fade up)
+.doctrine__pre-title,
+.doctrine__headline,
+.doctrine__description,
+.doctrine__grid,
+.doctrine__cta {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+
+  &.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.doctrine__pre-title.animate   { transition-delay: 0.1s; }
+.doctrine__headline.animate    { transition-delay: 0.2s; }
+.doctrine__description.animate { transition-delay: 0.35s; }
+.doctrine__grid.animate        { transition-delay: 0.55s; }
+.doctrine__cta.animate         { transition-delay: 0.1s; }
+
+// Pre-title
+.doctrine__pre-title {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  color: $color-gold;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+// Headline
+.doctrine__headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(36px, 6vw, 64px);
+  line-height: 1.12;
+  color: $color-white;
+  margin: 0 0 28px;
+
+  em {
+    font-style: italic;
+    color: $color-gold;
+  }
+}
+
+// Description
+.doctrine__description {
+  max-width: 700px;
+  margin: 0 auto 40px;
+  font-size: clamp(14px, 1.3vw, 16px);
+  font-weight: 300;
+  line-height: 1.75;
+  color: $color-gray;
+}
+
+// Grid of disciplines
+.doctrine__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px 20px;
+  margin-bottom: 48px;
+  text-align: left;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.doctrine__grid-item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  color: $color-white;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.doctrine__grid-bullet {
+  color: $color-gold;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+// CTA Button
+.doctrine__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 34px;
+  border: 1px solid $color-gold-soft;
+  border-radius: 0;
+  background: transparent;
+  text-decoration: none;
+  color: $color-gold;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    background: $color-gold;
+    border-color: $color-gold;
+    color: $color-white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(152, 100, 9, 0.3);
+
+    .doctrine__cta-text {
+      color: inherit;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-gold;
+    outline-offset: 3px;
+  }
+}
+
+.doctrine__cta-text {
+  color: inherit;
+  font-weight: 500;
+  transition: none;
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .doctrine__pre-title,
+  .doctrine__headline,
+  .doctrine__description,
+  .doctrine__grid,
+  .doctrine__cta {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

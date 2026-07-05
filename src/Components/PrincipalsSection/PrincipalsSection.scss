@@ -1,0 +1,228 @@
+// Components/PrincipalsSection/PrincipalsSection.scss
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+$color-bg: #ffffff;                     // clean white background
+$color-dark: #14120f;
+$color-gold: #986409;                   // darker, richer gold
+$color-gold-soft: rgba(152, 100, 9, 0.35);
+$color-gray: #5a5650;
+
+.principals {
+  background-color: $color-bg;
+  border-top: 1px solid rgba(152, 100, 9, 0.2);   // subtle gold separator
+  padding: clamp(60px, 10vh, 120px) 0;
+  font-family: 'Inter', sans-serif;
+  color: $color-dark;
+  overflow: hidden;
+
+  &__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    gap: clamp(40px, 8vw, 80px);
+
+    // On mobile, stack vertically (image on top)
+    @media (max-width: 900px) {
+      flex-direction: column;
+      gap: 40px;
+    }
+  }
+
+  // Initial hidden state for all animated children
+  &__pre-title,
+  &__headline,
+  &__description,
+  &__portfolio-title,
+  &__list,
+  &__cta,
+  &__image-wrapper {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+
+    &.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Custom stagger delays (same as Capabilities)
+  &__pre-title.animate       { transition-delay: 0.1s; }
+  &__headline.animate        { transition-delay: 0.2s; }
+  &__description.animate     { transition-delay: 0.35s; }
+  &__portfolio-title.animate { transition-delay: 0.5s; }
+  &__list.animate            { transition-delay: 0.6s; }
+  &__cta.animate             { transition-delay: 0.1s; }
+  &__image-wrapper.animate   { transition-delay: 0.1s; }
+
+  // Content (right side)
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__pre-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    color: $color-gold;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+
+  &__headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 500;
+    line-height: 1.15;
+    color: $color-dark;
+    margin: 0 0 24px;
+  }
+
+  &__description {
+    font-size: clamp(14px, 1.3vw, 16px);
+    font-weight: 300;
+    line-height: 1.7;
+    color: $color-gray;
+    margin: 0 0 24px;
+  }
+
+  &__portfolio-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0 0 16px;
+    color: $color-dark;
+    letter-spacing: 0.03em;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+
+    li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 14px;
+      font-weight: 400;
+      color: $color-dark;
+      line-height: 1.6;
+
+      &::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: $color-gold;
+        font-weight: bold;
+      }
+    }
+  }
+
+  // CTA button
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    padding: 16px 34px;
+    border: 1px solid $color-gold-soft;
+    border-radius: 0;
+    background: transparent;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease,
+                transform 0.15s ease, box-shadow 0.15s ease;
+
+    &:focus-visible {
+      outline: 2px solid $color-gold;
+      outline-offset: 3px;
+    }
+
+    &:hover {
+      background: $color-gold;
+      border-color: $color-gold;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(152, 100, 9, 0.35);
+
+      .principals__cta-text {
+        color: #fff;
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__cta-text {
+    position: relative;
+    z-index: 1;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: $color-gold;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+  }
+
+  // Image wrapper (left side)
+  &__image-wrapper {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(152, 100, 9, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 40px rgba(152, 100, 9, 0.15);
+    }
+
+    @media (max-width: 900px) {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    transition: transform 0.3s ease;
+
+    .principals__image-wrapper:hover & {
+      transform: scale(1.03);
+    }
+  }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .principals {
+    &__pre-title,
+    &__headline,
+    &__description,
+    &__portfolio-title,
+    &__list,
+    &__cta,
+    &__image-wrapper {
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}

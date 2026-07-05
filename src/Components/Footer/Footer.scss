@@ -1,0 +1,144 @@
+// Components/Footer/Footer.scss
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+$color-gold: #986409;
+$color-gold-soft: rgba(152, 100, 9, 0.25);
+$color-white: #f5f2ec;
+$color-gray: #8a8780;
+
+.footer {
+  background: #111;
+  color: $color-white;
+  font-family: 'Inter', sans-serif;
+  padding: 60px 40px 24px;
+
+  @media (max-width: 600px) {
+    padding: 40px 20px 16px;
+  }
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+
+  // Brand block
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    margin-bottom: 8px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  &__logo-o {
+    color: $color-white;
+  }
+
+  &__logo-v {
+    color: $color-gold;
+    margin-left: -2px;
+  }
+
+  &__name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $color-gold;
+    margin: 0 0 6px;
+  }
+
+  &__tagline {
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $color-gray;
+    margin: 0;
+  }
+
+  // Actions block
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 18px;
+
+    @media (max-width: 600px) {
+      align-items: flex-start;
+    }
+  }
+
+  &__cta {
+    display: inline-block;
+    padding: 12px 28px;
+    border: 1px solid $color-gold-soft;
+    background: transparent;
+    color: $color-gold;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+      background: $color-gold;
+      border-color: $color-gold;
+      color: #141210;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-gold;
+      outline-offset: 2px;
+    }
+  }
+
+  &__links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+
+    a {
+      color: $color-gray;
+      font-size: 13px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $color-gold;
+      }
+    }
+  }
+
+  // Bottom bar
+  &__bottom {
+    max-width: 1200px;
+    margin: 32px auto 0;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+  }
+
+  &__copyright {
+    font-size: 12px;
+    color: $color-gray;
+    margin: 0;
+  }
+}
