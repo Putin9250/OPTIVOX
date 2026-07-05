@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import HeroImg from "../../assets/Hero.jpeg";
 import "./Hero.scss";
+import Logo from "../../assets/Logo.png"
 
 const Hero = ({ isLoaded }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,9 +49,9 @@ const Hero = ({ isLoaded }) => {
         <div className="hero__container">
           <div className="hero__content">
             <div className={`hero__crest ${isLoaded ? "animate" : ""}`}>
-              <div className="hero__crest-mark">
-                <span className="hero__crest-o">O</span>
-                <span className="hero__crest-v">V</span>
+              <div className="">
+                              <img src={Logo} alt="Logo" style={{borderRadius:'50%'}} className="hero__crest-mark"/>
+                
               </div>
               <div className="hero__crest-title">OPTIVOX</div>
               <div className="hero__crest-subtitle">Strategies &amp; Communication</div>

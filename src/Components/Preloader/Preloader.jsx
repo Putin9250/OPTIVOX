@@ -1,6 +1,7 @@
 // Components/Preloader/Preloader.jsx
 import React, { useEffect, useState } from 'react';
 import './Preloader.scss';   // keep its styles separate
+import Logo from '../../assets/Logo.png'
 
 const Preloader = ({ onFinish }) => {
   const [visible, setVisible] = useState(true);
@@ -11,7 +12,7 @@ const Preloader = ({ onFinish }) => {
       setVisible(false);
       onFinish();
       document.body.style.overflow = '';
-    }, 500);
+    }, 1000);
     return () => {
       clearTimeout(timer);
       document.body.style.overflow = '';
@@ -23,7 +24,9 @@ const Preloader = ({ onFinish }) => {
   return (
     <div className="preloader">
       <div className="preloader__content">
-        <div className="preloader__mark">OV</div>
+        <div className="preloader__mark">
+          <img src={Logo} alt="" />
+        </div>
         <div className="preloader__title">OPTIVOX</div>
         <div className="preloader__line"></div>
         <div className="preloader__subtitle">Strategies &amp; Communication</div>

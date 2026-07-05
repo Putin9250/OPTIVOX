@@ -60,11 +60,10 @@ $navbar-height: 84px;
 
 .navbar__logo-icon {
   display: inline-flex;
-  width: 34px;
-  height: 34px;
+  width: 60px;
+  height: 45px;
   flex-shrink: 0;
-  border: 1px solid $color-gold-soft;
-  border-radius: 50%;
+  
   // Intentionally empty — place your OV mark (svg/img) here.
 }
 

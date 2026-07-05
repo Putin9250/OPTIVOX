@@ -1,6 +1,7 @@
 // Navbar.jsx
 import React, { useState, useEffect } from 'react';
 import './Navbar.scss';
+import Logo from '../../assets/Logo.png'
 
 // Menu data — top-level items with optional nested links (accordion sub-menus)
 const MENU_ITEMS = [
@@ -86,7 +87,9 @@ const Navbar = () => {
         <div className="navbar__container">
           {/* Logo — icon left empty; drop your OV mark (svg/img) inside navbar__logo-icon */}
           <a href="#home" className="navbar__logo">
-            <span className="navbar__logo-icon" aria-hidden="true"></span>
+            <span className="" aria-hidden="true">
+              <img src={Logo} alt="Logo" style={{borderRadius:'50%'}} className='navbar__logo-icon' />
+            </span>
             <span className="navbar__logo-text-group">
               <span className="navbar__logo-text">OPTIVOX</span>
               <span className="navbar__logo-subtext">STRATEGIES &amp; COMMUNICATION</span>
